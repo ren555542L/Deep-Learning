@@ -1,17 +1,8 @@
-# ============================================================
-#   COMPLETE BERT IMPLEMENTATION — Sentence Similarity (MRPC)
-#   Beginner Friendly | Google Colab Ready
-# ============================================================
-
-# ─────────────────────────────────────────────
-# STEP 0 — Install Libraries (run in Colab cell)
-# ─────────────────────────────────────────────
+# STEP 0 — Install Libraries
 # !pip install transformers datasets torch scikit-learn
 
-
-# ─────────────────────────────────────────────
 # STEP 1 — Import Everything
-# ─────────────────────────────────────────────
+
 import torch
 import numpy as np
 from datasets import load_dataset
@@ -23,19 +14,15 @@ from transformers import (
 )
 from sklearn.metrics import accuracy_score, f1_score
 
-
-# ─────────────────────────────────────────────
 # STEP 2 — Check GPU
-# ─────────────────────────────────────────────
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 # Output: Using device: cuda  (if GPU available)
 # Output: Using device: cpu   (if no GPU)
 
-
-# ─────────────────────────────────────────────
 # STEP 3 — Load MRPC Dataset
-# ─────────────────────────────────────────────
+
 print("\nLoading MRPC dataset...")
 dataset = load_dataset("glue", "mrpc")
 
@@ -53,10 +40,8 @@ print(f"  Sentence 1 : {sample['sentence1']}")
 print(f"  Sentence 2 : {sample['sentence2']}")
 print(f"  Label      : {sample['label']}  (1=paraphrase, 0=not)")
 
-
-# ─────────────────────────────────────────────
 # STEP 4 — Load Tokenizer
-# ─────────────────────────────────────────────
+
 print("\nLoading tokenizer...")
 MODEL_NAME = "bert-base-uncased"
 tokenizer  = AutoTokenizer.from_pretrained(MODEL_NAME)
@@ -65,9 +50,9 @@ print(f"Vocabulary size : {tokenizer.vocab_size}")
 print(f"Max length      : {tokenizer.model_max_length}")
 
 
-# ─────────────────────────────────────────────
+
 # STEP 5 — Understand Tokenization (Manual Demo)
-# ─────────────────────────────────────────────
+
 print("\n--- Tokenization Demo ---")
 
 s1 = "He said the food was delicious."
@@ -283,16 +268,3 @@ print("\nLoading saved model...")
 loaded_model     = AutoModelForSequenceClassification.from_pretrained("./my_bert_mrpc")
 loaded_tokenizer = AutoTokenizer.from_pretrained("./my_bert_mrpc")
 print("Model loaded successfully!")
-
-
-# ─────────────────────────────────────────────
-# COMPLETE! What you learned:
-# ─────────────────────────────────────────────
-# ✅ Loaded MRPC dataset
-# ✅ Tokenized sentence pairs with BERT tokenizer
-# ✅ Understood input_ids, attention_mask, token_type_ids
-# ✅ Loaded pre-trained BERT model
-# ✅ Fine-tuned BERT on sentence similarity task
-# ✅ Evaluated with accuracy and F1 metrics
-# ✅ Made real predictions on new sentences
-# ✅ Saved and reloaded the model
